@@ -77,7 +77,7 @@ song = [ % 按照2拍分节
 
 相邻乐音间的“啪”杂音是由于两个音频率不一致，在转换时产生了高频分量，为了消除它，需要给前一个音的末尾加上渐弱消音：
 
-![image-20230729202934623](.\images\image-20230729202934623.png)
+![image-20230729202934623](images/image-20230729202934623.png)
 
 我们知道 $xe^{-x}$ 的图像可以很好的满足这个特征曲线：
 
@@ -156,7 +156,7 @@ res = sin(2*pi*f*t*(1:length(harmoConfs))) * harmoConfs' .* envelope(t/T) ;
 
 #### 2.2 消除噪声
 
-![image-20230730152442509](.\images\image-20230730152442509.png)
+![image-20230730152442509](images/image-20230730152442509.png)
 
 这是一段周期性的音频，由于噪声是偏随机的，因此多次取平均可以消除噪声。
 
@@ -173,7 +173,7 @@ res = repmat(res, 10, 1);
 res = resample(res, 1, 10);
 ```
 
-![image-20230730154250778](.\images\image-20230730154250778.png)
+![image-20230730154250778](images/image-20230730154250778.png)
 
 #### 2.3 傅里叶分析谐波分量
 
@@ -190,7 +190,7 @@ plot([0:N-1]*Fs/N, abs(X1));
 
 由傅里叶变换的知识可知，这样得到的是各频率分量幅度的包络。为了得到更准确的变换，我们把信号重复若干次再做变换，以下是分别取1、10、1000个周期得到的变换图：
 
-![image-20230730164105538](.\images\image-20230730164105538.png)
+![image-20230730164105538](images/image-20230730164105538.png)
 
 随着时域周期数增加，频谱越来越近似冲激函数。
 
@@ -302,7 +302,7 @@ freq = base/N*Fs;
 
   结果如下图：
 
-  ![image-20230730210445877](.\images\image-20230730210445877.png)
+  ![image-20230730210445877](images/image-20230730210445877.png)
 
 ##### 2.4.2 分析音调
 
@@ -415,9 +415,7 @@ harmoConfs = harmo_amps{abs(tunes-f)<1};
 
 <img src=".\images\image-20230731034850951.png" alt="image-20230731034850951" style="zoom: 67%;" />
 
-`uiprogressdlg` 实现进度条，`uiconfirm` 实现弹窗，提取后的数据保存在 `instrument.mat` 文件中：
-
-<img src=".\images\image-20230731035807034.png" alt="image-20230731035807034" style="zoom: 40%;" /><img src=".\images\image-20230731035028129.png" alt="image-20230731035028129" style="zoom:50%;" />
+`uiprogressdlg` 实现进度条，`uiconfirm` 实现弹窗，提取后的数据保存在 `instrument.mat` 文件中：<img src=".\images\image-20230731035807034.png" alt="image-20230731035807034" style="zoom: 40%;" /><img src=".\images\image-20230731035028129.png" alt="image-20230731035028129" style="zoom:50%;" />
 
 PS：后来发现wav的采样率可以直接 `[wav, Fs] = audioread('xxx.wav')` 读取，遂删去了采样率输入框。
 
